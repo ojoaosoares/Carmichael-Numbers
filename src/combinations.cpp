@@ -5,7 +5,7 @@ std::vector<long long> combinationsCarmichael(const std::vector<long long> &iten
 
     std::vector<long long> chosed, factors;
 
-    if (r > 1)
+    if (r > 2)
         combination(itens, factors, 0, r, chosed);
 
     return chosed;
