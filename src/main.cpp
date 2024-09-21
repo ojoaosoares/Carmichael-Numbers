@@ -5,7 +5,12 @@
 int main() {
 
     long long n, d;
-    std::cin >> n >> d;
+    
+    std::cout << "n: ";
+    std::cin >> n;
+    
+    std::cout << "d: ";
+    std::cin >> d;
 
     std::vector<long long> primes = sieve_eratosthenes(n);
 
