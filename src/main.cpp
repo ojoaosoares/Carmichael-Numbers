@@ -4,12 +4,12 @@
 
 int main() {
 
-    long long limit, d;
-    std::cin >> limit >> d;
+    long long n, d;
+    std::cin >> n >> d;
 
-    std::vector<long long> primes = sieve_eratosthenes(limit);
+    std::vector<long long> primes = sieve_eratosthenes(n);
 
-    std::vector<long long> carmichael_numbers = combinations_carmichael(primes, d);
+    std::vector<long long> carmichael_numbers = combinationsCarmichael(primes, d);
 
     for (long long c : carmichael_numbers)
     {

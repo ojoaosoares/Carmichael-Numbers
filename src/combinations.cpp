@@ -1,49 +1,58 @@
 #include "combinations.hpp"
 #include <iostream>
 
-std::vector<long long> combinations_carmichael(const std::vector<long long> &itens, long long r) {
+std::vector<long long> combinationsCarmichael(const std::vector<long long> &itens, long long r) {
 
-    std::vector<long long> chosed, path;
+    std::vector<long long> chosed, factors;
 
     if (r > 1)
-        combination(itens, path, 0, r, chosed);
+        combination(itens, factors, 0, r, chosed);
 
     return chosed;
 }
 
-void combination(const std::vector<long long> &itens, std::vector<long long> path, long long curr, long long r, std::vector<long long> &chosed) {
+void combination(const std::vector<long long> &itens, std::vector<long long> factors, long long curr, long long r, std::vector<long long> &chosed) {
 
-    if (path.size() == r)
-    {   
-        for (size_t i = 0; i < r; i++)
-        {
-            long long p = 1;
+    if (factors.size() == r)
+    {  
 
-            for (size_t j = 0; j < r; j++)
-                p =  p*path[j] % (path[i] - 1);
-
-            if (p != 1)
-                return;
-        }
+        if(!isCarmichaelNumber(factors))
+            return;
 
         long long p = 1;
 
         for (size_t i = 0; i < r; i++)
-            p *= path[i];
+            p *= factors[i];
         
         chosed.push_back(p);
 
         return ;
     }
 
-    else if (itens.size() - (curr + 1) + path.size() < r)
+    else if (itens.size() - (curr + 1) + factors.size() < r)
         return;
 
-    path.push_back(itens[curr]);
+    factors.push_back(itens[curr]);
 
-    combination(itens, path, curr + 1, r, chosed);
+    combination(itens, factors, curr + 1, r, chosed);
 
-    path.pop_back();
+    factors.pop_back();
 
-    combination(itens, path, curr + 1, r, chosed);
+    combination(itens, factors, curr + 1, r, chosed);
+}
+
+bool isCarmichaelNumber(const std::vector<long long> &factors) {
+
+    for (size_t i = 0; i < factors.size(); i++)
+    {
+        long long p = 1;
+
+        for (size_t j = 0; j < factors.size(); j++)
+            p =  p*factors[j] % (factors[i] - 1);
+
+        if (p != 1)
+            false;
+    }
+
+    return true;
 }
